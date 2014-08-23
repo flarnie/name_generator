@@ -6,7 +6,7 @@ var React = require('react/react'),
 var NameApp = React.createClass({
   getInitialState: function() {
     return {
-      currentName: { first: '???', last: '???' }
+      currentName: this._generateName()
     };
   },
 
@@ -27,11 +27,19 @@ var NameApp = React.createClass({
     );
   },
 
-  _handleClick: function() {
+  /**
+   * @return {object} new set of name attributes
+   */
+  _generateName: function() {
+    //TODO: make this a method of the stores?
     var firstName = faker.Name.firstName(),
         lastName = faker.Name.lastName();
+    return { first: firstName, last: lastName };
+  },
+
+  _handleClick: function() {
     this.setState({
-      currentName: { first: firstName, last: lastName }
+      currentName: this._generateName()
     });
   }
 });
