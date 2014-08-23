@@ -1,4 +1,79 @@
-header h1 {
-  /* test */
-  color: green;
+html, body, #main {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.decoration-dots {
+  border-left: dotted 15px #F5BE58; /* yellow */
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 5%;
+  width: 1px;
+}
+
+header {
+  background-color: #079EA6; /* blue */
+  color: #1E0C42; /* dark blue */
+  font-family: "Rockwell Extra Bold", "Rockwell Bold", monospace;
+  font-weight: bold;
+  border-bottom: solid 20px #1E0C42; /* dark blue */
+}
+
+header h1, .name-app {
+  width: 80%;
+  margin: 0 auto;
+  padding: 1.5em;
+}
+
+#content {
+  background-color: #E3E0B3; /* sand */
+  color: #8C8B6F; /* dark sand */
+  height: 100%;
+}
+
+.name-app__name {
+  color: #1E0C42; /* dark blue */
+  margin-top: 1.5em;
+  border-bottom: dotted 5px #F0077B; /* deep pink */
+  display: inline-block;
+}
+
+.name-app__new-name {
+  color: #fff; /* white */
+  background-color: #F0077B; /* deep pink */
+  margin-top: 1.5em;
+
+  /* flat button styles */
+  vertical-align: top;
+  padding: 1em;
+  font-size: 160%;
+  text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  border: 0;
+  border-bottom: .5em solid #C50665; /* dark deep pink */
+  cursor: pointer;
+}
+
+/* flat button styles */
+.name-app__new-name:active  {
+  top: 1px;
+  outline: none;
+  -webkit-box-shadow: none;
+  background-color: #F9429D; /* bubblegum pink */
+}
+
+.name-app__new-name:hover {
+  background-color: #F9429D; /* bubblegum pink */
+}
+
+@media (min-width: 600px) {
+  .decoration-dots {
+    left: 15%;
+    width: 1px;
+  }
+  header h1, .name-app {
+    width: 50%;
+  }
 }

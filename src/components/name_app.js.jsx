@@ -17,8 +17,12 @@ var NameApp = React.createClass({
     return (
       <div className="name-app">
         <p>Current Name:</p>
-        <h3>{this.state.currentName.first} {this.state.currentName.last}</h3>
-        <button onClick={this._handleClick}>New Name</button>
+        <p>
+          <h3 className="name-app__name">
+            {this.state.currentName.first} {this.state.currentName.last}
+          </h3>
+        </p>
+        <button className="name-app__new-name" onClick={this._handleClick}>New Name</button>
       </div>
     );
   },
