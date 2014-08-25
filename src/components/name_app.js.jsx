@@ -1,13 +1,27 @@
 /** @jsx React.DOM */
 var React = require('react/react'),
-    NameStore = require('../stores/name_stores'),
-    faker = require('faker/faker');
+    NameAppActions = require('../actions/name_app_actions'),
+    NameStore = require('../stores/name_stores');
 
 var NameApp = React.createClass({
   getInitialState: function() {
     return {
-      currentName: this._generateName()
+      currentName: NameStore.getCurrentName()
     };
+  },
+
+  componentDidMount: function() {
+    NameStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function() {
+    NameStore.removeChangeListener(this._onChange);
+  },
+
+  _onChange: function() {
+    this.setState({
+      currentName: NameStore.getCurrentName()
+    });
   },
 
   /**
@@ -27,20 +41,8 @@ var NameApp = React.createClass({
     );
   },
 
-  /**
-   * @return {object} new set of name attributes
-   */
-  _generateName: function() {
-    //TODO: make this a method of the stores?
-    var firstName = faker.Name.firstName(),
-        lastName = faker.Name.lastName();
-    return { first: firstName, last: lastName };
-  },
-
   _handleClick: function() {
-    this.setState({
-      currentName: this._generateName()
-    });
+    NameAppActions.createCurrentName();
   }
 });
 

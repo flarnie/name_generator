@@ -1,7 +1,13 @@
 var AppDispatcher = require('../dispatcher/app_dispatcher'),
     NameConstants = require('../constants/name_constants');
 
-var NameActions = {
+var NameAppActions = {
+  createCurrentName: function() {
+    AppDispatcher.handleViewAction({
+      actionType: NameConstants.CURRENT_NAME_CREATE
+    });
+  },
+
   /**
    * @param {object} attributes the attributes of the new name
    */
@@ -35,4 +41,4 @@ var NameActions = {
   }
 };
 
-module.exports = NameActions;
+module.exports = NameAppActions;

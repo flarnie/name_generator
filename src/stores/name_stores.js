@@ -1,6 +1,7 @@
 var AppDispatcher = require('../dispatcher/app_dispatcher'),
     EventEmitter = require('events').EventEmitter,
     NameConstants = require('../constants/name_constants'),
+    NameWebAPIUtils = require('../utils/name_web_api_utils'),
     merge = require('react/lib/merge');
 
 var CHANGE_EVENT = 'change',
@@ -13,6 +14,23 @@ _savedNames = {
     last: 'TestLastName'
    }
 };
+
+_currentName = {};
+
+/**
+ * Updates the current name
+ * @param {object} attributes attributes of the new current name
+ */
+function _updateCurrentName(attributes) {
+  _currentName = attributes;
+};
+
+/**
+ * Generates a new current name
+ */
+function _generateCurrentName() {
+  NameWebAPIUtils.getNewCurrentName();
+}
 
 /**
  * Updates the whole collection
@@ -68,6 +86,10 @@ var NameStore = merge(EventEmitter.prototype, {
     return _savedNames;
   },
 
+  getCurrentName: function() {
+    return _currentName;
+  },
+
   emitChange: function() {
     this.emit(CHANGE_EVENT);
   },
@@ -114,6 +136,12 @@ AppDispatcher.register(function(payload) {
       if (id != '') {
         _delete(id);
       }
+      break;
+    case NameConstants.CURRENT_NAME_RECEIVE:
+      _updateCurrentName(action.attributes);
+      break;
+    case NameConstants.CURRENT_NAME_CREATE:
+      _generateCurrentName();
       break;
     default:
       return true;
