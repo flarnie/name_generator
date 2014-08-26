@@ -1,11 +1,22 @@
 var NameWebAPIUtils = require('utils/name_web_api_utils'),
     faker = require('faker/faker');
 
+/**
+ * We are using localStorage to mock up a server interaction.
+ * To test things, for now we are putting a dummy name in the namesList.
+ */
+
 var NameExampleData = {
-  // Load an initial name.
   init: function() {
-    // We don't need to create a mock server yet since nothing persists between names.
+    // Load an initial name.
     NameWebAPIUtils.getNewCurrentName();
+
+    // Load a dummy name into the namesList
+    var namesList = {},
+        id = Date.now();
+
+    namesList[id] = { id: id, first: 'name1', last: 'lastName1' };
+    localStorage.setItem('namesList', namesList);
   }
 };
 
