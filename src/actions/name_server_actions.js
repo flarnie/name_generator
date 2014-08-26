@@ -18,7 +18,7 @@ var NameServerActions = {
    */
   receiveNamesList: function(namesListAttributes) {
     AppDispatcher.handleServerAction({
-      actionType: NameConstants.NAMES_LIST_RECEIVE,
+      actionType: NameConstants.NAME_RECEIVE,
       attributes: namesListAttributes
     });
   },
@@ -29,7 +29,7 @@ var NameServerActions = {
    */
   create: function(attributes) {
     AppDispatcher.handleServerAction({
-      actionType: NameConstants.CREATE,
+      actionType: NameConstants.NAME_CREATE,
       attributes: attributes
     });
   },
@@ -40,7 +40,7 @@ var NameServerActions = {
    */
   index: function(id) {
     AppDispatcher.handleServerAction({
-      actionType: NameConstants.DELETE,
+      actionType: NameConstants.NAME_DELETE,
       id: id
     });
   },
