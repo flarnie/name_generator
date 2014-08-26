@@ -11,6 +11,39 @@ var NameServerActions = {
       attributes: currentNameAttrs
     });
   }
+
+  /**
+   * Handles the loading of namesList data from server.
+   * @param {object} namesListAttributes
+   */
+  receiveNamesList: function(namesListAttributes) {
+    AppDispatcher.handleServerAction({
+      actionType: NameConstants.NAMES_LIST_RECEIVE,
+      attributes: namesListAttributes
+    });
+  },
+
+  /**
+   * Handles successful addition of name to namesList on server.
+   * @param {object} attributes the attributes of the new name
+   */
+  create: function(attributes) {
+    AppDispatcher.handleServerAction({
+      actionType: NameConstants.CREATE,
+      attributes: attributes
+    });
+  },
+
+  /**
+   * Handles successful deletion of a name from the namesList on server.
+   * @param {string} id the id of the name that was deleted.
+   */
+  index: function(id) {
+    AppDispatcher.handleServerAction({
+      actionType: NameConstants.DELETE,
+      id: id
+    });
+  },
 };
 
 module.exports = NameServerActions;
