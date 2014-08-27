@@ -1,17 +1,22 @@
 /** @jsx React.DOM */
 var React = require('react/react'),
     NameAppActions = require('../actions/name_app_actions'),
-    NameStore = require('../stores/name_stores');
+    NameStore = require('../stores/name_stores'),
+    NameWebAPIUtils = require('../utils/name_web_api_utils');
 
 var NameApp = React.createClass({
   getInitialState: function() {
     return {
-      currentName: NameStore.getCurrentName()
+      currentName: NameStore.getCurrentName(),
+      namesList: NameStore.getAll()
     };
   },
 
   componentDidMount: function() {
     NameStore.addChangeListener(this._onChange);
+    // fetch the list of names from the server
+    // TODO: move this somewhere else?
+    NameWebAPIUtils.getAllNames();
   },
 
   componentWillUnmount: function() {
@@ -20,8 +25,10 @@ var NameApp = React.createClass({
 
   _onChange: function() {
     this.setState({
-      currentName: NameStore.getCurrentName()
+      currentName: NameStore.getCurrentName(),
+      namesList: NameStore.getAll()
     });
+    console.log('the state: ', this.state);
   },
 
   /**

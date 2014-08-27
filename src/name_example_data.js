@@ -16,7 +16,7 @@ var NameExampleData = {
         id = Date.now();
 
     namesList[id] = { id: id, first: 'name1', last: 'lastName1' };
-    localStorage.setItem('namesList', namesList);
+    localStorage.setItem('namesList', JSON.stringify(namesList));
   }
 };
 

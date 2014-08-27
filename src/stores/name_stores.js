@@ -22,7 +22,7 @@ function _updateCurrentName(attributes) {
  * Updates the names list
  * @param {object} attributes attributes of the new names list
  */
-function _updateCurrentName(attributes) {
+function _updateNamesList(attributes) {
   _savedNames = attributes;
 };
 

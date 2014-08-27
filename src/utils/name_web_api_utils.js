@@ -22,30 +22,30 @@ module.exports = {
     // Simulate getting 'show' of namesList or 'index' of names from server
     var namesList = localStorage.getItem('namesList');
     // on success:
-    NameServerActions.receiveNamesList(namesList);
+    NameServerActions.receiveNamesList(JSON.parse(namesList));
   },
 
   createName: function(attributes) {
     var id = Date.now(),
-        namesList = localStorage.getItem('namesList');
+        namesList = JSON.parse(localStorage.getItem('namesList'));
 
     attributes[id] = id;
     // persist to "server"
     namesList[id] = attributes;
-    localStorage.setItem('namesList', namesList);
+    localStorage.setItem('namesList', JSON.stringify(namesList));
 
     // on success:
-    NameServerActions.create(attributes);
+    NameServerActions.receiveNamesList(namesList);
   },
 
   deleteName: function(id) {
-    var namesList = localStorage.getItem('namesList');
+    var namesList = JSON.parse(localStorage.getItem('namesList'));
 
     // delete from "server"
     delete namesList[id];
-    localStorage.setItem('namesList', namesList);
+    localStorage.setItem('namesList', JSON.stringify(namesList));
 
     // on success:
-    NameServerActions.delete(id);
+    NameServerActions.receiveNamesList(namesList);
   }
 };
