@@ -10,7 +10,7 @@ var NameServerActions = {
       actionType: NameConstants.CURRENT_NAME_RECEIVE,
       attributes: currentNameAttrs
     });
-  }
+  },
 
   /**
    * Handles the loading of namesList data from server.
@@ -20,7 +20,7 @@ var NameServerActions = {
     AppDispatcher.handleServerAction({
       actionType: NameConstants.NAME_RECEIVE,
       attributes: namesListAttributes
-    });
+    })
   },
 
   /**
@@ -38,7 +38,7 @@ var NameServerActions = {
    * Handles successful deletion of a name from the namesList on server.
    * @param {string} id the id of the name that was deleted.
    */
-  index: function(id) {
+  delete: function(id) {
     AppDispatcher.handleServerAction({
       actionType: NameConstants.NAME_DELETE,
       id: id

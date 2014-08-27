@@ -5,14 +5,7 @@ var AppDispatcher = require('../dispatcher/app_dispatcher'),
     merge = require('react/lib/merge');
 
 var CHANGE_EVENT = 'change',
-    // TODO: load data from localstorage here?
 _savedNames = {
-  '1': {
-    id: 1,
-    favorite: false,
-    first: 'TestFirstName',
-    last: 'TestLastName'
-   }
 };
 
 _currentName = {};
@@ -26,6 +19,14 @@ function _updateCurrentName(attributes) {
 };
 
 /**
+ * Updates the names list
+ * @param {object} attributes attributes of the new names list
+ */
+function _updateCurrentName(attributes) {
+  _savedNames = attributes;
+};
+
+/**
  * Generates a new current name
  */
 function _generateCurrentName() {
@@ -33,47 +34,19 @@ function _generateCurrentName() {
 }
 
 /**
- * Updates the whole collection
- * replacing any old version of
- * the data.
- */
-function fetchNames() {
-  // Normally we would make an ajax request
-  // and then in the callback emit the server type
-  // update.
-  // I'm using localstorage instead of a real server.
-
-  _savedNames = sessionStorage.getItem(NameConstants.NAME_URL);
-}
-
-/**
- * Create a Name
+ * Adds a new name to the namesList
  * @param {object} attributes The attributes of the name, without id
  */
-function create(attributes) {
-  // TODO: save to server and get real id.
-  var id = Date.now();
-  attributes.id = id;
-  _savedNames[id] = attributes;
+function _create(attributes) {
+  NameWebAPIUtils.createName(attributes);
 }
 
 /**
- * Update a Name
- * @param {string} id The id of the Name
- * @param {object} attributes The attributes of a name
- */
-function update(id, attributes) {
-  // TODO: save to server
-  _savedNames[id] = merge(_savedNames[id], attributes);
-};
-
-/**
- * Delete a Name
+ * Delete a Name from the namesList
  * @param {number} id The id of the Name
  */
 function _delete(id) {
-  // TODO: delete from server
-  delete _savedNames[id];
+  NameWebAPIUtils.deleteName(id);
 };
 // TODO: implement destroyAll
 
@@ -119,17 +92,8 @@ AppDispatcher.register(function(payload) {
       id;
 
   switch(action.actionType) {
-    case NameConstants.NAME_FETCH:
-      fetchNames();
-      break;
     case NameConstants.NAME_CREATE:
-      create(action.attributes);
-      break;
-    case NameConstants.NAME_UPDATE:
-      id = action.id;
-      if (id != '') {
-        update(id, action.attributes);
-      }
+      _create(action.attributes);
       break;
     case NameConstants.NAME_DELETE:
       id = action.id;
@@ -139,6 +103,9 @@ AppDispatcher.register(function(payload) {
       break;
     case NameConstants.CURRENT_NAME_RECEIVE:
       _updateCurrentName(action.attributes);
+      break;
+    case NameConstants.NAME_RECEIVE:
+      _updateNamesList(action.attributes);
       break;
     case NameConstants.CURRENT_NAME_CREATE:
       _generateCurrentName();
