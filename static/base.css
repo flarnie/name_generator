@@ -4,6 +4,17 @@ html, body, #main {
   position: relative;
 }
 
+.content-main {
+  float: left;
+  width: 60%;
+}
+
+.content-side {
+  float: right;
+  width: 29%;
+  padding-right: 1.5em;
+}
+
 .decoration-dots {
   border-left: dotted 15px #F5BE58; /* yellow */
   height: 100%;
@@ -76,4 +87,12 @@ header h1, .name-app {
   header h1, .name-app {
     width: 50%;
   }
+}
+
+.favorite-names__list {
+  list-style: none;
+}
+
+.favorite-names__name {
+  color: #1E0C42; /* dark blue */
 }
