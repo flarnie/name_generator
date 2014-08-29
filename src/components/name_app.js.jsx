@@ -29,7 +29,10 @@ var NameApp = React.createClass({
       currentName: NameStore.getCurrentName(),
       namesList: NameStore.getAll()
     });
-    console.log('the state: ', this.state);
+  },
+
+  _handleAddFavorite: function() {
+    NameWebAPIUtils.createName(this.state.currentName);
   },
 
   /**
@@ -44,6 +47,11 @@ var NameApp = React.createClass({
             <h3 className="name-app__name">
               {this.state.currentName.first} {this.state.currentName.last}
             </h3>
+            <button
+              onClick={this._handleAddFavorite}
+              className="name-app__add-favorite">
+              &#9825;
+            </button>
           </p>
           <button className="name-app__new-name" onClick={this._handleClick}>New Name</button>
         </div>
