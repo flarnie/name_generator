@@ -1,17 +1,16 @@
 /** @jsx React.DOM */
-var react = require('react/react');
+var react = require('react/react'),
+    NameListItem = require('components/name_list_item'),
+    NameWebAPIUtils = require('../utils/name_web_api_utils');
 
 var NamesList = react.createClass({
+
   _renderNames: function() {
     var namesListItems = [];
     for (var nameDataKey in this.props.names) {
       var nameData = this.props.names[nameDataKey];
       namesListItems.push(
-        <li
-          className="favorite-names__name"
-          key={nameData.id}>
-          {nameData.first} {nameData.last}
-        </li>
+        <NameListItem name={nameData} />
       );
     }
     return namesListItems;

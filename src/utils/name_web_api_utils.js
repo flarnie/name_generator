@@ -26,10 +26,9 @@ module.exports = {
   },
 
   createName: function(attributes) {
-    var id = Date.now(),
+    var id = attributes.id,
         namesList = JSON.parse(localStorage.getItem('namesList'));
 
-    attributes[id] = id;
     // persist to "server"
     namesList[id] = attributes;
     localStorage.setItem('namesList', JSON.stringify(namesList));
